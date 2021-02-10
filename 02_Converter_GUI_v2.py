@@ -74,16 +74,16 @@ class Converter:
     def temp_convert(self, to):
         print(to)
 
+        error = "#FF6969" # Pale pink backgground for when entry box has errors
+
         # Retrieve amount entered into Entry field
         to_convert = self.to_convert_entry.get()
 
         try:
             to_convert = float(to_convert)
-            print("yay")
 
-        except ValueError:
-            print("oops")
-            
+
+
         # Check amount is a valid number
 
         # Convert to F
@@ -95,6 +95,10 @@ class Converter:
         # Display answer
 
         # Add answer to list for History
+
+        except ValueError:
+            self.converted_label.configure(text="Enter a number!", fg="red")
+            self.to_convert_entry.configure(bg=error)
 
 
 # main routine
