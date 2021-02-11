@@ -45,7 +45,7 @@ class Converter:
         self.to_c_button = Button(self.conversion_buttons_frame,
                                   text="To Centigrade", font="Arial 10 bold",
                                   bg="#CFECFF", padx=10, pady=10,
-                                  cosmmand=lambda: self.temp_convert(-459))
+                                  command=lambda: self.temp_convert(-459))
         self.to_c_button.grid(row=0, column=0)
 
         self.to_f_button = Button(self.conversion_buttons_frame,
