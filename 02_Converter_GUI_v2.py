@@ -1,6 +1,5 @@
 from tkinter import *
 from functools import partial # to prevent unwanted windows
-
 import random
 
 
@@ -18,9 +17,9 @@ class Converter:
         # Temperature Converter Heading (row 0)
         self.temp_heading_label = Label(self.converter_frame,
                                         text="Temperature Converter",
-                                            font="Arial 19 bold",
-                                            bg=background_color,
-                                            padx=10, pady=10)
+                                        font="Arial 19 bold",
+                                        bg=background_color,
+                                        padx=10, pady=10)
         self.temp_heading_label.grid(row=0)
 
         # User instructions (row 1)
@@ -72,18 +71,16 @@ class Converter:
         self.help_button.grid(row=0, column=1)
 
     def temp_convert(self, low):
-        print(low)
+        # print(low)
 
-        error = "#FF6969" # Pale pink backgground for when entry box has errors
+        error = "#FF6969" # Pale pink background for when entry box has errors
 
         # Retrieve amount entered into Entry field
         to_convert = self.to_convert_entry.get()
 
         try:
             to_convert = float(to_convert)
-            has_error = "no"
-
-            # Check amount is a valid number
+            has_errors = "no"
 
             # Convert to F
             if low == -273 and to_convert >= low:
@@ -105,12 +102,12 @@ class Converter:
                 has_errors = "yes"
 
             # Display answer
-                if has_errors == "no":
-                    self.converted_label.configure(text=answer, fg="blue")
-                    self.to_convert_entry.configure(bg="white")
-                else:
-                    self.converted_label.configure(text=answer, fg="red")
-                    self.to_convert_entry.configure(bg=error)
+            if has_errors == "no":
+                self.converted_label.configure(text=answer, fg="blue")
+                self.to_convert_entry.configure(bg="white")
+            else:
+                self.converted_label.configure(text=answer, fg="red")
+                self.to_convert_entry.configure(bg=error)
             # Add answer to list for History
 
         except ValueError:
@@ -123,8 +120,7 @@ class Converter:
         else:
             rounded = round(to_round, 1)
 
-        return round
-
+        return rounded
 
 # main routine
 if __name__ == "__main__":
