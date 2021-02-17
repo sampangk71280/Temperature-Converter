@@ -71,7 +71,7 @@ class Converter:
         self.help_button.grid(row=0, column=1)
 
     def temp_convert(self, low):
-        # print(low)
+        print(low)
 
         error = "#FF6969" # Pale pink background for when entry box has errors
 
