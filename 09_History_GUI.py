@@ -9,6 +9,17 @@ class Converter:
         # Formatting variables...
         background_color = "#D4BDFF" # light purple
 
+        # Initialise list to hold calculation history
+        self.all_calculations = ['10 degrees C is -12.2 degrees F',
+                                 '20 degrees C is -6.7 degrees F',
+                                 '30 degrees C is -1.1 degrees F',
+                                 '40 degrees C is 4.4 degrees F',
+                                 '50 degrees C is 10 degrees F',
+                                 '60 degrees C is 15.6 degrees F',
+                                 '70 degrees C is 21.1 degrees F']
+
+
+
         # Converter Frame
         self.converter_frame = Frame(bg=background_color,
                                      pady=10)
@@ -73,8 +84,7 @@ class Converter:
     def temp_convert(self, low):
         print(low)
 
-        error = "#FF6969" # Pale pink background for when
-        #  box has errors
+        error = "#FF6969" # Pale pink background for when entry box has errors
 
         # Retrieve amount entered into Entry field
         to_convert = self.to_convert_entry.get()
@@ -109,7 +119,11 @@ class Converter:
             else:
                 self.converted_label.configure(text=answer, fg="red")
                 self.to_convert_entry.configure(bg=error)
+
             # Add answer to list for History
+            if answer != "Too Cold":
+                self.all_calculations.append(answer)
+                print(self.all_calculations)
 
         except ValueError:
             self.converted_label.configure(text="Enter a number!", fg="red")
