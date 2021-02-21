@@ -32,16 +32,14 @@ class Converter:
         # History Button (row 1)
         self.history_button = Button(self.converter_frame, text="History",
                                   font=("Arial", "14"),
-                                  padx=10, pady=10, command=self.history)
+                                  padx=10, pady=10, command=lambda: self.history(self.all_calculations))
         self.history_button.grid(row=1)
 
-    def history(self):
-        print("You asked for history")
-        get_history = History(self)
-        get_history.history_text.configure(text="History text goes here")
+    def history(self, calc_history):
+        History(self, calc_history)
 
 class History:
-    def __init__(self, partner):
+    def __init__(self, partner, calc_history):
 
         background = "#E0FFC9" # pale green
 
@@ -76,6 +74,21 @@ class History:
         self.history_text.grid(column=0, row=1)
 
         # History output goes here... (row 2)
+
+        # Generaet string from list of calculations...
+        history_string = ""
+
+        if len(calc_history) >= 7:
+            for item in range(0,7):
+                history_string += calc_history[len(calc_history) - item - 1] + "\n"
+
+        else:
+            for 
+
+        # Label to display calculation history to user
+        self.calc_label = Label(self.history_frame, text=history_string,
+                                bg=background, font="Arial 12", justify=LEFT)
+        self.calc_label.grid(row=2)
 
         # Export / Dismiss Button Frame (row 3)
         self.export_dismiss_frame = Frame(self.history_frame)
