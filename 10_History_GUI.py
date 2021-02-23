@@ -33,6 +33,10 @@ class Converter:
                                   padx=10, pady=10, command=lambda: self.history(self.all_calculations))
         self.history_button.grid(row=1)
 
+        if len(self.all_calculation) == 0:
+            self.history_button.config(state=DISABLED)
+
+
     def history(self, calc_history):
         History(self, calc_history)
 

@@ -10,6 +10,9 @@ class Converter:
         # Formatting variables...
         background_color = "light blue"
 
+        # Initialise list to hold calculation history
+        self.all_calculation = []
+
         self.converter_frame = Frame(width=600, height=600, bg=background_color, pady=10)
         self.converter_frame.grid()
 
@@ -18,7 +21,7 @@ class Converter:
                                            font=("Arial", "16", "bold"),
                                            bg=background_color,
                                            padx=10, pady=10)
-        self.temp_converter_label.grid(row=0)\
+        self.temp_converter_label.grid(row=0)
 
         # Export Button (row 1)
         self.export_button = Button(self.converter_frame, text="Export",

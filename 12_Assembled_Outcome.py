@@ -71,12 +71,13 @@ class Converter:
                                         command=lambda: self.history(self.all_calculation))
         self.history_button.grid(row=0, column=0)
 
-        if len(self.all_calculation) == 0:
-            self.history_button.config(state=DISABLED)
 
         self.help_button = Button(self.hist_help_frame, font="Arial 12 bold",
                                   text="Help", width=5)
         self.help_button.grid(row=0, column=1)
+
+        if len(self.all_calculation) == 0:
+            self.history_button.config(state=DISABLED)
 
     def temp_convert(self, low):
         print(low)
@@ -134,6 +135,7 @@ class Converter:
             rounded = round(to_round, 1)
 
         return rounded
+
     def history(self, calc_history):
         History(self, calc_history)
 
