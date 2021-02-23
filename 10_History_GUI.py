@@ -15,9 +15,7 @@ class Converter:
                                  '20 degrees C is -6.7 degrees F',
                                  '30 degrees C is -1.1 degrees F',
                                  '40 degrees C is 4.4 degrees F',
-                                 '50 degrees C is 10 degrees F',
-                                 '60 degrees C is 15.6 degrees F',
-                                 '70 degrees C is 21.1 degrees F']
+                                 '50 degrees C is 10 degrees F']
 
         self.converter_frame = Frame(width=600, height=600, bg=background_color, pady=10)
         self.converter_frame.grid()
@@ -83,7 +81,14 @@ class History:
                 history_string += calc_history[len(calc_history) - item - 1] + "\n"
 
         else:
-            for 
+            for item in calc_history:
+                history_string += calc_history[len(calc_history) -
+                                                calc_history.index(item) - 1] + "\n"
+                self.history_text.config(text="Here is your calculation "
+                                              "history. You can use the "
+                                              "export button to save this "
+                                              "data to a text file if "
+                                              "desired.")
 
         # Label to display calculation history to user
         self.calc_label = Label(self.history_frame, text=history_string,
