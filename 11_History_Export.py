@@ -162,6 +162,8 @@ class Export:
                                   command=partial(self.close_export, partner))
         self.dismiss_btn.grid(row=2, pady=10)
 
+
+
     def close_export(self, partner):
         # Put export button back to normal...
         partner.export_button.config(state=NORMAL)
