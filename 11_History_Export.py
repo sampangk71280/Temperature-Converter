@@ -29,7 +29,7 @@ class Converter:
                                            font=("Arial", "16", "bold"),
                                            bg=background_color,
                                            padx=10, pady=10)
-        self.temp_converter_label.grid(row=0)\
+        self.temp_converter_label.grid(row=0)
 
         # History Button (row 1)
         self.history_button = Button(self.converter_frame, text="History",
@@ -37,8 +37,8 @@ class Converter:
                                   padx=10, pady=10, command=lambda: self.history(self.all_calculation))
         self.history_button.grid(row=1)
 
-        #if len(self.all_calculation) == 0:
-            #self.history_button.config(state=DISABLED)
+        if len(self.all_calculation) == 0:
+            self.history_button.config(state=DISABLED)
 
 
     def history(self, calc_history):
@@ -115,7 +115,7 @@ class History:
                                     command=lambda: self.export(calc_history))
         self.export_button.grid(row=0, column=0)
 
-        # Dismss button
+        # Dismiss button
         self.export_button = Button(self.export_dismiss_frame, text="Dismiss",
                                     font="Arial 12 bold", command=partial(self.close_history, partner))
         self.export_button.grid(row=0, column=1)
@@ -187,11 +187,11 @@ class Export:
         self.save_cancel_frame.grid(row=5, pady=10)
 
         # Save and Cancel Buttons (row 0 of save_cancel_frame)
-        self.save_button = Button(self.save_cancel_frame, text="Save",
+        self.save_button = Button(self.save_cancel_frame, text="Save", font="Arial 12 bold",
                                   command=partial(lambda: self.save_history(partner, calc_history)))
         self.save_button.grid(row=0, column=0)
 
-        self.cancel_button = Button(self.save_cancel_frame, text="Cancel",
+        self.cancel_button = Button(self.save_cancel_frame, text="Cancel", font="Arial 12 bold",
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
