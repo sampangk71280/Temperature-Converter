@@ -39,7 +39,7 @@ class Help:
         # disable help button
         partner.help_button.config(state=DISABLED)
 
-            # Sets up child window (ie: help box)
+        # Sets up child window (ie: help box)
         self.help_box = Toplevel()
 
         # If users press cross at top, closes help and 'releases' help button

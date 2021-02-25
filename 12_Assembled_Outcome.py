@@ -217,7 +217,6 @@ class History:
         partner.history_button.config(state=NORMAL)
         self.history_box.destroy()
 
-
 class Help:
     def __init__(self, partner):
         background = "orange"

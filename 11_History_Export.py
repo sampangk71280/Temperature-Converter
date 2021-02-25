@@ -12,10 +12,10 @@ class Converter:
         background_color = "light blue"
 
         # Initialise list to hold calculation history
-        self.all_calculation = []
+        # self.all_calculation = []
 
         # Initialise list to hold calculation history
-        self.all_calculations = ['10 degrees C is -12.2 degrees F',
+        self.all_calculation = ['10 degrees C is -12.2 degrees F',
                                  '20 degrees C is -6.7 degrees F',
                                  '30 degrees C is -1.1 degrees F',
                                  '40 degrees C is 4.4 degrees F',
@@ -34,7 +34,7 @@ class Converter:
         # History Button (row 1)
         self.history_button = Button(self.converter_frame, text="History",
                                   font=("Arial", "14"),
-                                  padx=10, pady=10, command=lambda: self.history(self.all_calculations))
+                                  padx=10, pady=10, command=lambda: self.history(self.all_calculation))
         self.history_button.grid(row=1)
 
         #if len(self.all_calculation) == 0:
@@ -132,7 +132,7 @@ class Export:
     def __init__(self, partner, calc_history):
 
         print(calc_history)
-        background = "#FFD47E"  # pale orange
+        background = "#F6D89E"  # pale orange
 
         # disable export button
         partner.export_button.config(state=DISABLED)
@@ -171,17 +171,24 @@ class Export:
                                  font="Arial 10 italic", wrap=225, padx=10, pady=10)
         self.export_text.grid(row=2, pady=10)
 
+
         # Filename Entry Box (row 3)
         self.filename_entry = Entry(self.export_frame, width =20,
                                     font="Arial 14 bold", justify=CENTER)
         self.filename_entry.grid(row=3, pady=10)
 
-        # Save / Cancel Frame (row 4)
+        # Error message labels (initially blank, row 4)
+        self.save_error_label = Label(self.export_frame, text="", fg="maroon",
+                                       bg=background)
+        self.save_error_label.grid(row=4)
+
+        # Save / Cancel Frame (row 5)
         self.save_cancel_frame = Frame(self.export_frame)
         self.save_cancel_frame.grid(row=5, pady=10)
 
         # Save and Cancel Buttons (row 0 of save_cancel_frame)
-        self.save_button = Button(self.save_cancel_frame, text="Save")
+        self.save_button = Button(self.save_cancel_frame, text="Save",
+                                  command=partial(lambda: self.save_history(partner, calc_history)))
         self.save_button.grid(row=0, column=0)
 
         self.cancel_button = Button(self.save_cancel_frame, text="Cancel",
@@ -225,10 +232,29 @@ class Export:
             has_error = "yes"
 
         if has_error == "yes":
-            print("Invalid filename - {}".format(problem))
+            # Display error message
+            self.save_error_label.config(text="Invalid filename - {}".format(problem))
+            # change entry box background to pink
+            self.filename_entry.config(bg="#ffafaf")
+            print()
 
         else:
-            print("You entered a valid filename")
+            # if there are no errors, generate text tile and then close dialouguue
+            # add .txt suffix
+            filename = filename + ".txt"
+
+            # create file to hold data
+            f = open(filename, "w+")
+
+            # add new line at end of each item
+            for item in calc_history:
+                f.write(item + "\n")
+
+            # close file
+            f.close()
+
+            # close dialogue
+            self.close_export(partner)
 
 
 # main routine
