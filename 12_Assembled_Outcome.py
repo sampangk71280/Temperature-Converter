@@ -258,6 +258,7 @@ class Help:
         partner.help_button.config(state=NORMAL)
         self.help_box.destroy()
 
+# doesn't work here but works on component 11 hist export
 class Export:
     def __init__(self, partner, calc_history):
 

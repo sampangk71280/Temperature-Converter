@@ -44,6 +44,7 @@ class Converter:
     def history(self, calc_history):
         History(self, calc_history)
 
+# doesnt work here but works on assembled outcome
 class History:
     def __init__(self, partner, calc_history):
 
