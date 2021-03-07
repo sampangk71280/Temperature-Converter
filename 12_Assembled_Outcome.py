@@ -74,14 +74,14 @@ class Converter:
 
 
         self.help_button = Button(self.hist_help_frame, font="Arial 12 bold",
-                                  text="Help", width=5)
+                                  text="Help", width=5, command=self.help)
         self.help_button.grid(row=0, column=1)
 
         if len(self.all_calculation) == 0:
             self.history_button.config(state=DISABLED)
 
     def temp_convert(self, low):
-        print(low)
+        # print(low)
 
         error = "#FF6969" # Pale pink background for when
         #  box has errors
@@ -139,6 +139,18 @@ class Converter:
 
     def history(self, calc_history):
         History(self, calc_history)
+
+    def help(self):
+        get_help = Help(self)
+        get_help.help_text.configure(text="Please enter a number in the box "
+                                          "and then push one of the buttons "
+                                          "to convert the number to either "
+                                          "degrees C or degrees F. \n\n"
+                                          "The Calculation History area shows "
+                                          "up to seven past calculations "
+                                          "(most recent at the top). \n\nYou can "
+                                          "also export your full calculation "
+                                          "history to a text file if desired.")
 
 class History:
     def __init__(self, partner, calc_history):
@@ -227,7 +239,7 @@ class History:
 class Export:
     def __init__(self, partner, calc_history):
 
-        print(calc_history)
+        # print(calc_history)
         background = "#F6D89E"  # pale orange
 
         # disable export button
@@ -291,11 +303,6 @@ class Export:
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
-        """# Dismiss button (row 2)
-        self.dismiss_btn = Button(self.export_frame, text="Dismiss", width=10, bg="orange",
-                                  font="arial 10 bold",
-                                  command=partial(self.close_export, partner))
-        self.dismiss_btn.grid(row=2, pady=10) """
 
     def close_export(self, partner):
         # Put export button back to normal...
@@ -309,7 +316,7 @@ class Export:
         valid_char = "[A-Za-z0-9_]"
 
         filename = self.filename_entry.get()
-        print(filename)
+        # print(filename)
 
         for letter in filename:
             if re.match(valid_char, letter):
@@ -351,6 +358,44 @@ class Export:
 
             # close dialogue
             self.close_export(partner)
+
+class Help:
+    def __init__(self, partner):
+        background = "#FBD8D8"
+
+        # disable help button
+        partner.help_button.config(state=DISABLED)
+
+        # Sets up child window (ie: help box)
+        self.help_box = Toplevel()
+
+        # If users press cross at top, closes help and 'releases' help button
+        self.help_box.protocol('WM_DELETE_WINDOW', partial(self.close_help, partner))
+
+        # Set up GUI Frame
+        self.help_frame = Frame(self.help_box, bg=background)
+        self.help_frame.grid()
+
+        # Set up Help heading (row 0)
+        self.how_heading = Label(self.help_frame, text="Help / Instructions",
+                                 font="arial 10 bold", bg=background)
+        self.how_heading.grid(row=0)
+
+        # Help text (label, row 1)
+        self.help_text = Label(self.help_frame, text="",
+                               justify=LEFT, width=40, bg=background, wrap=250)
+        self.help_text.grid(column=0, row=1)
+
+        # Dismiss button (row 2)
+        self.dismiss_btn = Button(self.help_frame, text="Dismiss", width=10,
+                                  font="arial 10 bold",
+                                  command=partial(self.close_help, partner))
+        self.dismiss_btn.grid(row=2, pady=10)
+
+    def close_help(self, partner):
+        # Put help button back to normal...
+        partner.help_button.config(state=NORMAL)
+        self.help_box.destroy()
 
 # main routine
 if __name__ == "__main__":
