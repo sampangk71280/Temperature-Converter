@@ -1,5 +1,6 @@
 from tkinter import *
 from functools import partial # to prevent unwanted windows
+import re
 
 import random
 
@@ -144,6 +145,8 @@ class History:
 
         background = "#E0FFC9" # pale green
 
+        # calc_history = []
+
         # disable history button
         partner.history_button.config(state=DISABLED)
 
@@ -179,7 +182,7 @@ class History:
         # Generaet string from list of calculations...
         history_string = ""
 
-        if len(calc_history) > 7:
+        if len(calc_history) >= 7:
             for item in range(0,7):
                 history_string += calc_history[len(calc_history) - item - 1] + "\n"
 
@@ -204,7 +207,8 @@ class History:
 
         # Export button
         self.export_button = Button(self.export_dismiss_frame, text="Export",
-                                    font="Arial 12 bold")
+                                    font="Arial 12 bold",
+                                    command=lambda: self.export(calc_history))
         self.export_button.grid(row=0, column=0)
 
         # Dismiss button
@@ -220,45 +224,6 @@ class History:
     def export(self, calc_history):
         Export(self, calc_history)
 
-class Help:
-    def __init__(self, partner):
-        background = "orange"
-
-        # disable help button
-        partner.help_button.config(state=DISABLED)
-
-        # Sets up child window (ie: help box)
-        self.help_box = Toplevel()
-
-        # If users press cross at top, closes help and 'releases' help button
-        self.help_box.protocol('WM_DELETE_WINDOW', partial(self.close_help, partner))
-
-        # Set up GUI Frame
-        self.help_frame = Frame(self.help_box, bg=background)
-        self.help_frame.grid()
-
-        # Set up Help heading (row 0)
-        self.how_heading = Label(self.help_frame, text="Help / Instructions",
-                                 font="arial 10 bold", bg=background)
-        self.how_heading.grid(row=0)
-
-        # Help text (label, row 1)
-        self.help_text = Label(self.help_frame, text="",
-                               justify=LEFT, width=40, bg=background, wrap=250)
-        self.help_text.grid(column=0, row=1)
-
-        # Dismiss button (row 2)
-        self.dismiss_btn = Button(self.help_frame, text="Dismiss", width=10, bg="orange",
-                                  font="arial 10 bold",
-                                  command=partial(self.close_help, partner))
-        self.dismiss_btn.grid(row=2, pady=10)
-
-    def close_help(self, partner):
-        # Put help button back to normal...
-        partner.help_button.config(state=NORMAL)
-        self.help_box.destroy()
-
-# doesn't work here but works on component 11 hist export
 class Export:
     def __init__(self, partner, calc_history):
 
@@ -302,14 +267,15 @@ class Export:
                                  font="Arial 10 italic", wrap=225, padx=10, pady=10)
         self.export_text.grid(row=2, pady=10)
 
+
         # Filename Entry Box (row 3)
-        self.filename_entry = Entry(self.export_frame, width=20,
+        self.filename_entry = Entry(self.export_frame, width =20,
                                     font="Arial 14 bold", justify=CENTER)
         self.filename_entry.grid(row=3, pady=10)
 
         # Error message labels (initially blank, row 4)
         self.save_error_label = Label(self.export_frame, text="", fg="maroon",
-                                      bg=background)
+                                       bg=background)
         self.save_error_label.grid(row=4)
 
         # Save / Cancel Frame (row 5)

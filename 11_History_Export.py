@@ -44,13 +44,12 @@ class Converter:
     def history(self, calc_history):
         History(self, calc_history)
 
-# doesnt work here but works on assembled outcome
 class History:
     def __init__(self, partner, calc_history):
 
         background = "#E0FFC9" # pale green
 
-        calc_history = []
+        # calc_history = []
 
         # disable history button
         partner.history_button.config(state=DISABLED)

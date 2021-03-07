@@ -1,0 +1,5 @@
+10 degrees C is -12.2 degrees F
+20 degrees C is -6.7 degrees F
+30 degrees C is -1.1 degrees F
+40 degrees C is 4.4 degrees F
+50 degrees C is 10 degrees F
