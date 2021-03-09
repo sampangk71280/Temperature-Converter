@@ -349,6 +349,8 @@ class Export:
             # create file to hold data
             f = open(filename, "w+")
 
+            f.write("Temperature Convertor Calculations\n\n")
+
             # add new line at end of each item
             for item in calc_history:
                 f.write(item + "\n")

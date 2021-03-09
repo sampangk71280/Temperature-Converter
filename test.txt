@@ -1,0 +1,6 @@
+Temperature Convertor Calculations
+
+0 degrees C is -17.8 degrees F
+0 degrees C is -17.8 degrees F
+25 degrees C is -3.9 degrees F
+25 degrees C is 77 degrees F

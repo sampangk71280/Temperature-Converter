@@ -1,0 +1,7 @@
+1 degrees C is -17.2 degrees F
+2 degrees C is -16.7 degrees F
+3 degrees C is -16.1 degrees F
+4 degrees C is -15.6 degrees F
+5 degrees C is -15 degrees F
+6 degrees C is -14.4 degrees F
+7 degrees C is -13.9 degrees F

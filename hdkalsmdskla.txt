@@ -1,3 +1,0 @@
-3 degrees C is -16.1 degrees F
-31 degrees C is 87.8 degrees F
-35 degrees C is 1.7 degrees F
